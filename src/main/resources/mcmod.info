@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "stonecatalysts",
+    "name": "StoneCatalysts",
+    "description": "Generate additional stone types with a lava and water stone gen",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["uberifix"],
+    "credits": "\nThe pxl8 community, for being mostly cool \nHatsune Miku for making minecraft",
+    "logoFile": "stonecatalysts.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
