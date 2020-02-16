@@ -1,33 +1,27 @@
 package network.pxl8.stonecatalysts;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+import network.pxl8.stonecatalysts.config.Configuration;
 import network.pxl8.stonecatalysts.lib.LibMeta;
-import network.pxl8.stonecatalysts.proxy.Proxy;
 
-@Mod(modid = LibMeta.MOD_ID, version = LibMeta.VERSION, acceptableRemoteVersions = "*")
+@Mod("stonecatalysts")
 public class StoneCatalysts {
-    @Mod.Instance
-    public static StoneCatalysts instance;
+    public StoneCatalysts() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-    @SidedProxy(clientSide = LibMeta.CLIENT_PROXY, serverSide = LibMeta.SERVER_PROXY, modId = LibMeta.MOD_ID)
-    private static Proxy proxy;
+        MinecraftForge.EVENT_BUS.register(this);
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        proxy.preInit();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+        Configuration.loadConfig(Configuration.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("stonecatalysts-common.toml"));
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.init();
-    }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit();
+    private void setup(final FMLCommonSetupEvent event) {
+        LibMeta.LOG.debug("StoneCatalysts");
     }
 }

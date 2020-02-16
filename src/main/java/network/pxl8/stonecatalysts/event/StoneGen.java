@@ -1,16 +1,18 @@
 package network.pxl8.stonecatalysts.event;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import network.pxl8.stonecatalysts.config.Conf;
-import network.pxl8.stonecatalysts.lib.LibTools;
+import network.pxl8.stonecatalysts.config.Configuration;
+import network.pxl8.stonecatalysts.lib.LibMeta;
+import vazkii.quark.world.module.NewStoneTypesModule;
+
 
 @Mod.EventBusSubscriber
 public class StoneGen {
@@ -21,32 +23,32 @@ public class StoneGen {
         Block oldBlock = event.getOriginalState().getBlock();
         Block newBlock = event.getNewState().getBlock();
 
-        if (Conf.base_config.REPLACE_STONE && oldBlock.equals(Blocks.WATER) && newBlock.equals(Blocks.STONE)) {
-            IBlockState catalyst = event.getWorld().getBlockState(new BlockPos(x, y - 2, z));
+        if (Configuration.REPLACE_STONE.get() && oldBlock.equals(Blocks.WATER) && newBlock.equals(Blocks.STONE)) {
+            BlockState catalyst = event.getWorld().getBlockState(new BlockPos(x, y - 1, z));
             doReplacements(event, catalyst);
         }
 
-        if (Conf.base_config.REPLACE_COBBLE && oldBlock.equals(Blocks.FLOWING_LAVA) && newBlock.equals(Blocks.COBBLESTONE)) {
-            IBlockState catalyst = event.getWorld().getBlockState(new BlockPos(x, y - 1, z));
+        if (Configuration.REPLACE_COBBLE.get() && oldBlock.equals(Blocks.LAVA) && newBlock.equals(Blocks.COBBLESTONE)) {
+            BlockState catalyst = event.getWorld().getBlockState(new BlockPos(x, y - 1, z));
             doReplacements(event, catalyst);
         }
     }
 
-    private static void replaceBlock(BlockEvent.FluidPlaceBlockEvent event, IBlockState catalyst, String replace) {
-        if (catalyst.equals(LibTools.getStateFromString(replace))) { event.setNewState(LibTools.getStateFromString(replace)); }
+    private static void replaceBlock(BlockEvent.FluidPlaceBlockEvent event, BlockState catalyst, BlockState replace) {
+        if (catalyst.equals(replace)) { event.setNewState(replace); }
     }
 
-    private static void doReplacements(BlockEvent.FluidPlaceBlockEvent event, IBlockState catalyst) {
-        replaceBlock(event, catalyst, "minecraft:stone/1");
-        replaceBlock(event, catalyst, "minecraft:stone/3");
-        replaceBlock(event, catalyst, "minecraft:stone/5");
+    private static void doReplacements(BlockEvent.FluidPlaceBlockEvent event, BlockState catalyst) {
+        replaceBlock(event, catalyst, Blocks.GRANITE.getDefaultState());
+        replaceBlock(event, catalyst, Blocks.DIORITE.getDefaultState());
+        replaceBlock(event, catalyst, Blocks.ANDESITE.getDefaultState());
 
-        if(Loader.isModLoaded("quark") && Conf.compat_config.QUARK_COMPAT) {
-            replaceBlock(event, catalyst, "quark:basalt");
-            replaceBlock(event, catalyst, "quark:marble");
-            replaceBlock(event, catalyst, "quark:limestone");
-            replaceBlock(event, catalyst, "quark:slate");
-            replaceBlock(event, catalyst, "quark:jasper");
+        if(ModList.get().isLoaded("quark") && Configuration.ENABLE_QUARK_COMPAT.get()) {
+            replaceBlock(event, catalyst, NewStoneTypesModule.marbleBlock.getDefaultState());
+            replaceBlock(event, catalyst, NewStoneTypesModule.limestoneBlock.getDefaultState());
+            replaceBlock(event, catalyst, NewStoneTypesModule.jasperBlock.getDefaultState());
+            replaceBlock(event, catalyst, NewStoneTypesModule.slateBlock.getDefaultState());
+            replaceBlock(event, catalyst, NewStoneTypesModule.basaltBlock.getDefaultState());
         }
     }
 }
