@@ -7,11 +7,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import network.pxl8.stonecatalysts.config.Configuration;
-import network.pxl8.stonecatalysts.lib.LibMeta;
-import vazkii.quark.world.module.NewStoneTypesModule;
+//import vazkii.quark.world.module.NewStoneTypesModule;
 
 
 @Mod.EventBusSubscriber
@@ -43,12 +41,12 @@ public class StoneGen {
         replaceBlock(event, catalyst, Blocks.DIORITE.getDefaultState());
         replaceBlock(event, catalyst, Blocks.ANDESITE.getDefaultState());
 
-        if(ModList.get().isLoaded("quark") && Configuration.ENABLE_QUARK_COMPAT.get()) {
-            replaceBlock(event, catalyst, NewStoneTypesModule.marbleBlock.getDefaultState());
-            replaceBlock(event, catalyst, NewStoneTypesModule.limestoneBlock.getDefaultState());
-            replaceBlock(event, catalyst, NewStoneTypesModule.jasperBlock.getDefaultState());
-            replaceBlock(event, catalyst, NewStoneTypesModule.slateBlock.getDefaultState());
-            replaceBlock(event, catalyst, NewStoneTypesModule.basaltBlock.getDefaultState());
-        }
+        //if(ModList.get().isLoaded("quark") && Configuration.ENABLE_QUARK_COMPAT.get()) {
+        //    replaceBlock(event, catalyst, NewStoneTypesModule.marbleBlock.getDefaultState());
+        //    replaceBlock(event, catalyst, NewStoneTypesModule.limestoneBlock.getDefaultState());
+        //    replaceBlock(event, catalyst, NewStoneTypesModule.jasperBlock.getDefaultState());
+        //    replaceBlock(event, catalyst, NewStoneTypesModule.slateBlock.getDefaultState());
+        //    replaceBlock(event, catalyst, NewStoneTypesModule.basaltBlock.getDefaultState());
+        //}
     }
 }

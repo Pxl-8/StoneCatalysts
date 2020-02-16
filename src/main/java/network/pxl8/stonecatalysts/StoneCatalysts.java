@@ -21,7 +21,5 @@ public class StoneCatalysts {
         Configuration.loadConfig(Configuration.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("stonecatalysts-common.toml"));
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        LibMeta.LOG.debug("StoneCatalysts");
-    }
+    private void setup(final FMLCommonSetupEvent event) { }
 }

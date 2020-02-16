@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.14.4-1.0.0"
+version = "1.15.2-1.0.0"
 group = "network.pxl8.stonecatalysts"
 archivesBaseName = "stonecatalysts"
 
@@ -75,9 +75,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.2.0'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.12'
     
-    compileOnly "quark:Quark:r2.0:210"
+    //compileOnly "quark:Quark:r2.0:210"
 }
 
 jar {

@@ -35,8 +35,8 @@ public class Configuration {
     }
 
     private static void setupCompatConfig() {
-        ENABLE_QUARK_COMPAT = COMMON_BUILDER.comment("Adds quark stones (Basalt, Marble, Limestone, Slate, Jasper) as catalysts")
-                .define("ENABLE_QUARK_COMPAT", true);
+        //ENABLE_QUARK_COMPAT = COMMON_BUILDER.comment("Adds quark stones (Basalt, Marble, Limestone, Slate, Jasper) as catalysts")
+        //        .define("ENABLE_QUARK_COMPAT", true);
         COMMON_BUILDER.pop();
     }
 
