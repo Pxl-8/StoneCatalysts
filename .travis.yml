@@ -9,11 +9,11 @@ script: "./gradlew build -s"
 deploy:
   provider: releases
   api_key:
-    secure: <key>
+    secure: BVS0jeBo2ugpRtbnypACCzOYLTkzUE5ulPEC+9wkbgvaeADYyJntY1Tlhvu3V3WXv89e63IG0rnBURWOhrHdBojITCXUqyQJL8HcekN0o6QedDBEtc0MxpEg3ntqlFRg362x2VH9BbeYKwLQccxjEdwCwwA2LtjYPoRqJMMfX16hK0WRw1qWuZxdU2BLfs8ss/3wiS+OMFrDPdZZwRDo6/62Lf9nqXAgWSl5O4IxQbSAl+AHq6RkBWKoIPH8ag0ZRTmuyA+koNSpOTyTByCEkmV5jX5rKCBXgdMJ0SXHWfyUJ5LSSQGkhrPysT+uutercji9w4p271mBHWQR/nJ7cahgMB3Eqkn4F2B6Ge/4LwS5EmeQ5NeunCbs6QPEzvJJu4QoBPHLGUtrbHmuw9VKxa5+9cgwQDyh83+t8jXpvMQUcNEmyltyGABnl5TdmdoBZyLRht89QNAuaiPUe71NG5ZUwSkqPPN2E3jDfWfKB8mux8xg+ilixrQVn2EWdGCkoKt9zSTyAUkftrgrqDxmhh0xdJ4qpBa+1/po1Aw1UfnOVycNrJuXXgd7dt3hrT/SYrSHZ9HgpGxBKcM2Ddbcsc8c4ZgoJ0dwXmNC7Kb+RcD74e/4e5c0ndBqtwg6iEnjQmjdv9LRbsBJSsWIaIn1lVBFmckIYcXrUTpquIrwCN4=
   overwrite: true
   file_glob: true
   file: "build/libs/*"
   skip_cleanup: true
   on:
-    repo: Pxl-8/<repo>
+    repo: Pxl-8/StoneCatalysts
     tags: true

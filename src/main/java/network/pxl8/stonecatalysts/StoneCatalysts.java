@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import network.pxl8.stonecatalysts.lib.LibMeta;
 import network.pxl8.stonecatalysts.proxy.Proxy;
 
-@Mod(modid = LibMeta.MOD_ID, version = LibMeta.VERSION)
+@Mod(modid = LibMeta.MOD_ID, version = LibMeta.VERSION, acceptableRemoteVersions = "*")
 public class StoneCatalysts {
     @Mod.Instance
     public static StoneCatalysts instance;

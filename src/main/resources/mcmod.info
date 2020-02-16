@@ -2,7 +2,7 @@
   {
     "modid": "stonecatalysts",
     "name": "StoneCatalysts",
-    "description": "Generate additional stone types with a lava and water stone gen",
+    "description": "Generate additional stone types with stone gens using a catalyst",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "",
