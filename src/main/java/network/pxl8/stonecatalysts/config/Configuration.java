@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.Mod;
 import network.pxl8.stonecatalysts.lib.LibMeta;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class Configuration {
@@ -18,11 +20,16 @@ public class Configuration {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_QUARK_COMPAT;
 
+    public static ForgeConfigSpec.ConfigValue<List<String>> CUSTOM_CATALYSTS;
+    public static ForgeConfigSpec.BooleanValue DEBUG_MESSAGES;
+
     static {
         COMMON_BUILDER.push("base_config");
         setupBaseConfig();
         COMMON_BUILDER.push("compat_config");
         setupCompatConfig();
+        COMMON_BUILDER.push("custom_config");
+        setupCustomConfig();
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 
@@ -37,6 +44,15 @@ public class Configuration {
     private static void setupCompatConfig() {
         //ENABLE_QUARK_COMPAT = COMMON_BUILDER.comment("Adds quark stones (Basalt, Marble, Limestone, Slate, Jasper) as catalysts")
         //        .define("ENABLE_QUARK_COMPAT", true);
+        COMMON_BUILDER.pop();
+    }
+
+    private static void setupCustomConfig() {
+        List<String> catalysts = new ArrayList<>();
+        CUSTOM_CATALYSTS = COMMON_BUILDER.comment("Add additional catalysts", "Usage: Add namespaced ids in \"\" seperated by commas", "Example: [\"minecraft:netherrack\", \"quark:brimstone\"]")
+                .define("CUSTOM_CATALYSTS", catalysts);
+        DEBUG_MESSAGES = COMMON_BUILDER.comment("Prints debug messages to the log for each custom catalyst added")
+                .define("DEBUG_MESSAGES", true);
         COMMON_BUILDER.pop();
     }
 
