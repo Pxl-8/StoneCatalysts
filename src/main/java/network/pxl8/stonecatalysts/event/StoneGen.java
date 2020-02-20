@@ -4,15 +4,20 @@ import net.minecraft.block.Block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import network.pxl8.stonecatalysts.config.Configuration;
+
 import network.pxl8.stonecatalysts.lib.LibMeta;
 import vazkii.quark.world.module.NewStoneTypesModule;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class StoneGen {
@@ -49,6 +54,28 @@ public class StoneGen {
             replaceBlock(event, catalyst, NewStoneTypesModule.jasperBlock.getDefaultState());
             replaceBlock(event, catalyst, NewStoneTypesModule.slateBlock.getDefaultState());
             replaceBlock(event, catalyst, NewStoneTypesModule.basaltBlock.getDefaultState());
+        }
+
+        if(!StoneGen.customCatalysts.isEmpty()) {
+            for(BlockState block : StoneGen.customCatalysts) {
+                replaceBlock(event, catalyst, block);
+            }
+        }
+    }
+
+    private static List<BlockState> customCatalysts = new ArrayList<>();
+
+    public static void getCustomCatalysts() {
+        if(!Configuration.CUSTOM_CATALYSTS.get().isEmpty()) {
+            for(String catalyst : Configuration.CUSTOM_CATALYSTS.get()) {
+                Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(catalyst));
+                if(!block.equals(Blocks.AIR)) {
+                    customCatalysts.add(block.getDefaultState());
+                    if(Configuration.DEBUG_MESSAGES.get()) { LibMeta.LOG.debug("Added custom catalyst: " + block); }
+                } else {
+                    LibMeta.LOG.warn("Could not find catalyst from namespaced id: " + catalyst);
+                }
+            }
         }
     }
 }
