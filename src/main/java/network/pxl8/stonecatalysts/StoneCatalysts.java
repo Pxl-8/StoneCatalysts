@@ -1,6 +1,7 @@
 package network.pxl8.stonecatalysts;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -27,5 +28,6 @@ public class StoneCatalysts {
 
     private void serverStart(FMLServerStartingEvent event) {
         StoneGen.getCustomCatalysts();
+        if(ModList.get().isLoaded("jei")) { StoneGen.registerJEIRecipes(); }
     }
 }

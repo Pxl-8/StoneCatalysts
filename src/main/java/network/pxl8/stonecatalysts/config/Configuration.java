@@ -20,7 +20,8 @@ public class Configuration {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_QUARK_COMPAT;
 
-    public static ForgeConfigSpec.ConfigValue<List<String>> CUSTOM_CATALYSTS;
+    public static ForgeConfigSpec.ConfigValue<List<String>> CUSTOM_STONE_CATALYSTS;
+    public static ForgeConfigSpec.ConfigValue<List<String>> CUSTOM_COBBLE_CATALYSTS;
     public static ForgeConfigSpec.BooleanValue DEBUG_MESSAGES;
 
     static {
@@ -34,10 +35,10 @@ public class Configuration {
     }
 
     private static void setupBaseConfig() {
-        REPLACE_STONE = COMMON_BUILDER.comment("Replace stone generation (Lava over Water) with the corresponding catalyst")
-                .define("REPLACE_STONE", true);
-        REPLACE_COBBLE = COMMON_BUILDER.comment("Replace cobble generation (Water into Flowing Lava) with the corresponding catalyst")
-                .define("REPLACE_COBBLE", true);
+        REPLACE_STONE = COMMON_BUILDER.comment("Allow vanilla stone variants as stone generator catalysts (Flowing Lava into Water Source)")
+                .define("VANILLA_VARIANTS_AS_STONE", true);
+        REPLACE_COBBLE = COMMON_BUILDER.comment("Allow vanilla stone variants as cobble generator catalysts (Water into Flowing Lava)")
+                .define("VANILLA_VARIANTS_AS_COBBLE", true);
         COMMON_BUILDER.pop();
     }
 
@@ -49,8 +50,11 @@ public class Configuration {
 
     private static void setupCustomConfig() {
         List<String> catalysts = new ArrayList<>();
-        CUSTOM_CATALYSTS = COMMON_BUILDER.comment("Add additional catalysts", "Usage: Add namespaced ids in \"\" seperated by commas", "Example: [\"minecraft:netherrack\", \"quark:brimstone\"]")
-                .define("CUSTOM_CATALYSTS", catalysts);
+        CUSTOM_STONE_CATALYSTS = COMMON_BUILDER.comment("Add additional stone generator catalysts", "Usage: Add namespaced ids in \"\" seperated by commas", "Example: [\"minecraft:netherrack\", \"quark:brimstone\"]")
+                .define("CUSTOM_STONE_CATALYSTS", catalysts);
+        CUSTOM_COBBLE_CATALYSTS = COMMON_BUILDER.comment("Add additional cobble generator catalysts", "Usage: Add namespaced ids in \"\" seperated by commas", "Example: [\"minecraft:netherrack\", \"quark:brimstone\"]")
+                .define("CUSTOM_COBBLE_CATALYSTS", catalysts);
+
         DEBUG_MESSAGES = COMMON_BUILDER.comment("Prints debug messages to the log for each custom catalyst added")
                 .define("DEBUG_MESSAGES", true);
         COMMON_BUILDER.pop();

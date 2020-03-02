@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.15.2-1.1.0"
+version = "1.15.2-1.2.0"
 group = "network.pxl8.stonecatalysts"
 archivesBaseName = "stonecatalysts"
 
@@ -72,12 +72,18 @@ repositories {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.15.2-31.1.12'
     
     //compileOnly "quark:Quark:r2.0:210"
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 }
 
 jar {
