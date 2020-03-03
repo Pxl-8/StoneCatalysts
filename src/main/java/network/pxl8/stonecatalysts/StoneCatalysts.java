@@ -1,12 +1,16 @@
 package network.pxl8.stonecatalysts;
 
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import network.pxl8.stonecatalysts.event.StoneGen;
 import network.pxl8.stonecatalysts.lib.LibMeta;
 import network.pxl8.stonecatalysts.proxy.Proxy;
+
+import java.util.Arrays;
 
 @Mod(modid = LibMeta.MOD_ID, version = LibMeta.VERSION, acceptableRemoteVersions = "*")
 public class StoneCatalysts {
@@ -23,6 +27,8 @@ public class StoneCatalysts {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        StoneGen.getCustomCatalysts();
+        if (Loader.isModLoaded("jei")) { StoneGen.registerJEIRecipes(); }
         proxy.init();
     }
 
